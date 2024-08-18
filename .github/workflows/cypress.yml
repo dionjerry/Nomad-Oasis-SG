@@ -2,8 +2,7 @@ name: Cypress Tests
 
 on:
   schedule:
-  #  - cron: '0 0 * * *'  # Runs daily at midnight UTC
-   - cron: '*/10 * * * *'  # Runs every 10 minutes
+    - cron: '*/10 * * * *'  # Runs every 10 minutes
 
 jobs:
   cypress-tests:
@@ -15,6 +14,12 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Install Cypress
+        run: npx cypress install
+
+      - name: Verify Cypress Installation
+        run: npx cypress verify
 
       - name: Run Cypress tests
         run: npx cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }}
