@@ -1,25 +1,27 @@
-name: Cypress Tests
+name: Cypress Schduled Tests
 
 on:
   schedule:
     - cron: '*/10 * * * *'  # Runs every 10 minutes
 
 jobs:
-  cypress-tests:
+  cypress-run:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2] # Uses 2 parallel instances
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Install Cypress
-        run: npx cypress install
-
-      - name: Verify Cypress Installation
-        run: npx cypress verify
-
-      - name: Run Cypress tests
-        run: npx cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }}
+      - name:  Cypress scheduled run
+        uses: cypress-io/github-action@v6
+        with:
+          # Records to Cypress Cloud 
+          record: true
+          parallel: true # Runs test in parallel using settings above
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
