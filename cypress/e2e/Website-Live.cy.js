@@ -1,5 +1,5 @@
 
-describe('Website Address Check', () => {
+describe('Website Address Check and verfy title', () => {
   let resources;
 
   before(() => {
@@ -9,11 +9,10 @@ describe('Website Address Check', () => {
     });
   });
 
-  it('Check Address', () => {
-    cy.visit(resources.baseUrl);
-  });
 
-  it('Checks title', () => {
-    
+  it('Checks Address and title', () => {
+    cy.visit(resources.baseUrl);
+    cy.get('body').should('be.visible');
+    cy.title().should('include', 'Nomad Oasis');
   });
 });
