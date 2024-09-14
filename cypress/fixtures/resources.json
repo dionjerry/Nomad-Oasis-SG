@@ -1,3 +1,5 @@
 {
-    "baseUrl": "https://oasis-staging.nomadinternet.com"
+    "baseUrl": "https://oasis-staging.nomadinternet.com",
+    "Email" : "rasmus.domingo@moonversion.com",
+    "Password": "rasmus.domingo@moonversion.com"
   }

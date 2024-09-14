@@ -9,10 +9,25 @@ describe('Website Address Check and verfy title', () => {
     });
   });
 
+  beforeEach(() => {
+    cy.visit(resources.baseUrl);
+  });
+
 
   it('Checks Address and title', () => {
-    cy.visit(resources.baseUrl);
+
+    
+
     cy.get('body').should('be.visible');
+
     cy.title().should('include', 'Nomad Oasis');
+
+   
   });
+  it('Checks body text', () => {
+    
+    cy.get('body').should('contain', 'Internet');
+
+  });
+
 });
